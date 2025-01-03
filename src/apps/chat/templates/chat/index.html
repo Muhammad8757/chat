@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter a Chat Room</h1>
+        <input id="room-name-input" type="text" placeholder="Type the chat room name here">
+        <br>
+        <input id="room-name-submit" type="button" value="Enter">
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <script>
+        // Autofocus on the input field
+        const roomInput = document.querySelector('#room-name-input');
+        roomInput.focus();
+
+        const errorMessage = document.querySelector('#error-message');
+
+        // Handle Enter key press
+        roomInput.onkeyup = function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        // Handle button click
+        document.querySelector('#room-name-submit').onclick = function() {
+            const roomName = roomInput.value.trim();
+
+            // Check if the input is empty
+            if (!roomName) {
+                errorMessage.textContent = 'Please enter a valid chat room name.';
+                return;
+            }
+
+            // Clear error and redirect
+            errorMessage.textContent = '';
+            window.location.pathname = `/api/v1/room/${encodeURIComponent(roomName)}/`;
+        };
+    </script>
+</body>
+</html>
