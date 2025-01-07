@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100vh; /* Полная высота экрана */
+            display: flex;
+            justify-content: center; /* Горизонтальное выравнивание */
+            align-items: center; /* Вертикальное выравнивание */
+            background-color: #f8f9fa; /* Светлый фон */
+            margin: 0; /* Убираем отступы */
+        }
+
+        .card {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Добавь тень для красоты */
+            width: 100%; /* Займёт всю ширину, но с максимальным ограничением */
+            max-width: 400px; /* Максимальная ширина */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Register</h3>
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label for="registerUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="registerUsername" placeholder="Choose a username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="registerEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="registerPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="phone" class="form-control" id="phone" placeholder="Phone number" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+    
+            const username = document.getElementById("registerUsername").value;
+            const email = document.getElementById("registerEmail").value;
+            const password = document.getElementById("registerPassword").value;
+            const phone = document.getElementById("phone").value;
+  
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/v1/register/", { 
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password,
+                        phone: phone,
+                    }),
+                });
+    
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`Ошибка регистрации: ${errorData.detail || "Что-то пошло не так"}`);
+                    return;
+                }
+    
+                const data = await response.json();
+                alert("Registration successful, bro! You’re in!");
+    
+                window.location.href = "http://127.0.0.1:8000/api/v1/room/";
+            } catch (error) {
+                console.error("Ошибка запроса:", error);
+                alert("Братан, сервер не отвечает. Проверь подключение.");
+            }
+        });
+    </script>
+</body>
+</html>

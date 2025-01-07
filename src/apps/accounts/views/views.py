@@ -43,5 +43,9 @@ class RegisterAPIView(viewsets.GenericViewSet):
         return Response({"data": "invalid creditals"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(["GET"])
-def test(request):
-    return render(request, "chat/index.html")
+def login_html(request):
+    return render(request, "accounts/login.html")
+
+@api_view(["GET"])
+def register_html(request):
+    return render(request, "accounts/register.html")
