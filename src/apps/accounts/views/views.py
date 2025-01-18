@@ -8,7 +8,8 @@ from src.apps.accounts.serializers import auth_serializer
 from src.apps.accounts.mapper import UserMapper
 from src.apps.accounts.services.auth_service import UserService
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 class RegisterAPIView(viewsets.GenericViewSet):
     model = User
@@ -47,10 +48,12 @@ class RegisterAPIView(viewsets.GenericViewSet):
             return Response(token, status=status.HTTP_200_OK)
         return Response({"data": "invalid creditals"}, status=status.HTTP_404_NOT_FOUND)
 
+@permission_classes([IsAuthenticated])
 @api_view(["GET"])
 def login_html(request):
     return render(request, "accounts/login.html")
 
+@permission_classes([IsAuthenticated])
 @api_view(["GET"])
 def register_html(request):
     return render(request, "accounts/register.html")
