@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
+from src.apps.chat.services import send_websocket
 from src.apps.accounts.dtos.user_dto import LoginDto, UserDto
 from src.apps.accounts.functions import get_token
 from src.apps.accounts.models import User
@@ -38,6 +39,10 @@ class RegisterAPIView(viewsets.GenericViewSet):
         dto = UserMapper.from_serializer_to_dto(LoginDto, serializer, ["username", "password"])
         user = UserService.login(self, request, dto)
         if user:
+            send_websocket(
+                group=f"notifications_{user.id}",
+                data={"message": "У тебя новое уведомление!"},
+            )
             token = get_token(user)
             return Response(token, status=status.HTTP_200_OK)
         return Response({"data": "invalid creditals"}, status=status.HTTP_404_NOT_FOUND)
