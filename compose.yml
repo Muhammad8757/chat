@@ -10,8 +10,8 @@ services:
     networks:
       - dev
     volumes:
-      - /root/chat/nginx:/etc/nginx/nginx.conf
-  
+      - /chat/nginx:/etc/nginx/
+
   api:
     build: 
       context: .
