@@ -13,6 +13,7 @@ services:
       - /chat/nginx:/etc/nginx/
 
   api:
+    container_name: api
     build: 
       context: .
       dockerfile: Dockerfile
