@@ -9,6 +9,8 @@ services:
       - 8080:80
     networks:
       - dev
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
   
   api:
     build: 
