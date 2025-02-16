@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-    - 80:80
+    - 80:8000
     networks:
       - dev  
     depends_on:
