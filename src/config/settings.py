@@ -81,7 +81,9 @@ CHANNEL_LAYERS = {
 }
 CORS_ALLOWED_ORIGINS = [
     "http://45.130.165.129",
+    "http://localhost",
 ]
+
 
 DATABASES = {
     'default': {
