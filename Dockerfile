@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache \
 COPY requirements.txt $PROJECT_DIR
 
 RUN pip install -r $PROJECT_DIR/requirements.txt
-gaa
+
 COPY . $PROJECT_DIR/
 
 RUN chmod +x ${PROJECT_DIR}/scripts/start_api.sh
