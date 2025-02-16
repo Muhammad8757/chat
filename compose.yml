@@ -6,10 +6,9 @@ services:
       - 8001:80
   
   api:
-    image: api
-    container_name: api
-    ports:
-      - 8000:8000
+    build: 
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - db
   
