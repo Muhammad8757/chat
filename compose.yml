@@ -3,7 +3,7 @@ services:
     image: nginx
     container_name: server
     ports:
-      - 8001:80
+      - 8000:80
   
   api:
     build: 
