@@ -4,7 +4,7 @@ networks:
 services:
   nginx:
     image: nginx
-    container_name: server
+    container_name: nginx
     ports:
       - 8080:80
     networks:
