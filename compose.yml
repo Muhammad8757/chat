@@ -1,6 +1,7 @@
-services:
-  networks:
+networks:
     - dev
+
+services:
   nginx:
     image: nginx
     container_name: server
