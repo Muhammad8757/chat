@@ -14,13 +14,13 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - db
     ports:
     - 8000:8000
     networks:
       - dev  
-  
+    depends_on:
+      - db
+    
   db:
     image: postgres
     container_name: db
