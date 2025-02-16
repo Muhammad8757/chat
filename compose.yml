@@ -1,9 +1,13 @@
 services:
+  networks:
+    - dev
   nginx:
     image: nginx
     container_name: server
     ports:
       - 8000:80
+    networks:
+      - dev
   
   api:
     build: 
@@ -12,7 +16,9 @@ services:
     depends_on:
       - db
     ports:
-    - 8000:8000  
+    - 8000:8000
+    networks:
+      - dev  
   
   db:
     image: postgres
@@ -23,3 +29,5 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
+    networks:
+      - dev
