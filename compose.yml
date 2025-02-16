@@ -6,11 +6,11 @@ services:
     image: nginx
     container_name: nginx
     ports:
-      - 8080:80
+      - 80:8000
     networks:
       - dev
     volumes:
-      - /chat/nginx:/etc/nginx/
+      - /root/chat/nginx:/etc/nginx/
 
   api:
     container_name: api
