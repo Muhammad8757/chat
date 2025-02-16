@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: nginx
+    container_name: server
+    ports:
+      - 8001:80
+  
+  api:
+    image: api
+    container_name: api
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
