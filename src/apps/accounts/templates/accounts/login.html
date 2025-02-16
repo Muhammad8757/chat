@@ -55,7 +55,7 @@
         const password = document.getElementById("loginPassword").value;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/v1/login/", { 
+            const response = await fetch("http://45.130.165.129/api/v1/login/", { 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -73,7 +73,7 @@
             }
 
             const data = await response.json();
-            window.location.href = "http://127.0.0.1:8000/api/v1/room/";
+            window.location.href = "http://45.130.165.129/api/v1/room/";
 
             localStorage.setItem("token", data.token);
         } catch (error) {
